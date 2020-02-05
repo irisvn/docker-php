@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  webserver:
+    build: 
+      context: ./bin/webserver
+    container_name: '5.6.x-webserver'
+    restart: 'always'
+    ports:
+      - "80:80"
+      - "443:443"
+    links: 
+      - mysql
+    volumes: 
+      - /g/php56/www:/var/www/html
+      - /g/php56/config/php/php.ini:/usr/local/etc/php/php.ini
+      - /g/php56/config/vhosts:/etc/apache2/sites-enabled
+      - /g/php56/logs/apache2:/var/log/apache2
+  mysql:
+    build: ./bin/mysql
+    container_name: '5.6-mysql'
+    restart: 'always'
+    ports:
+      - "3306:3306"
+    volumes: 
+      - /g/php56/data/mysql:/var/lib/mysql
+      - /g/php56/logs/mysql:/var/log/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: 'iris-56-phpmyadmin'
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - '8080:80'
+    volumes: 
+      - /sessions
+  redis:
+    container_name: 'iris-56-redis'
+    image: redis:latest
+    ports:
+      - "6379:6379"
