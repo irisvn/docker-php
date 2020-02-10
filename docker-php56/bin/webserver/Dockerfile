@@ -8,7 +8,7 @@ RUN apt-get -y update && apt-get upgrade -y
 RUN apt-get -y install --fix-missing apt-utils nano wget dialog \
     build-essential git curl libcurl3 libcurl3-dev zip \
     libmcrypt-dev libsqlite3-dev libsqlite3-0 mysql-client \
-    zlib1g-dev libicu-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
+    zlib1g-dev libicu-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libxml2-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Composer
@@ -19,6 +19,7 @@ RUN docker-php-ext-install curl \
     && docker-php-ext-install tokenizer \
     && docker-php-ext-install json \
     && docker-php-ext-install mcrypt \
+	&& docker-php-ext-install soap \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install pdo_sqlite \
     && docker-php-ext-install mysqli \
