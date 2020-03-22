@@ -11,6 +11,15 @@ This is a basic LAMP stack environment built using Docker Compose. It consists f
 
 Clone this repository on your local computer and switch to branch `7.3.x`. Run the `docker-compose up -d`.
 
+```shell
+git clone https://github.com/sprintcube/docker-compose-lamp.git
+cd docker-compose-lamp/
+git fetch --all
+git checkout 7.3.x
+cp sample.env .env
+docker-compose up -d
+```
+
 Your LAMP stack is now ready!! You can access it via `http://localhost`.
 
 ## Configuration
@@ -104,7 +113,7 @@ phpMyAdmin is configured to run on port 8080. Use following default credentials.
 
 http://localhost:8080/  
 username: root  
-password: 12345678
+password: tiger
 
 ## Redis
 
